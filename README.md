@@ -2,3 +2,43 @@
 Peer-graded Assignment: Analyzing Historical Stock/Revenue Data and Building a Dashboard
 ----
 This repository contains screenshots for the code and results of jupyter notebook, for the final project of the course.
+----
+
+--> Addition for Questions 5 and 6
+
+
+
+    Question 5
+    
+stock_data = tesla_data
+revenue_data = tesla_revenue
+stock = 'Tesla'
+make_graph(stock_data, revenue_data, stock)
+
+    Question 6
+
+stock_data = gme_data
+revenue_data = gme_revenue_df
+stock = 'GameStop'
+make_graph(stock_data, revenue_data, stock)
+
+--> The code for visualising the data utilizes the defined function
+
+def make_graph(stock_data, revenue_data, stock):
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=("Historical Share Price", "Historical Revenue"), vertical_spacing = .3)
+    stock_data_specific = stock_data[stock_data.Date <= '2021-06-14']
+    revenue_data_specific = revenue_data[revenue_data.Date <= '2021-04-30']
+    fig.add_trace(go.Scatter(x=pd.to_datetime(stock_data_specific.Date, infer_datetime_format=True), y=stock_data_specific.Close.astype("float"), name="Share Price"), row=1, col=1)
+    fig.add_trace(go.Scatter(x=pd.to_datetime(revenue_data_specific.Date, infer_datetime_format=True), y=revenue_data_specific.Revenue.astype("float"), name="Revenue"), row=2, col=1)
+    fig.update_xaxes(title_text="Date", row=1, col=1)
+    fig.update_xaxes(title_text="Date", row=2, col=1)
+    fig.update_yaxes(title_text="Price ($US)", row=1, col=1)
+    fig.update_yaxes(title_text="Revenue ($US Millions)", row=2, col=1)
+    fig.update_layout(showlegend=False,
+    height=900,
+    title=stock,
+    xaxis_rangeslider_visible=True)
+    fig.show()
+    from IPython.display import display, HTML
+    fig_html = fig.to_html()
+    display(HTML(fig_html))
