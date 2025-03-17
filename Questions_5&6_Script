@@ -1,11 +1,13 @@
-   Question 5
+Additions for Questions 5 & 6
+
+--> Question 5
     
 stock_data = tesla_data
 revenue_data = tesla_revenue
 stock = 'Tesla'
 make_graph(stock_data, revenue_data, stock)
 
-    Question 6
+--> Question 6
 
 stock_data = gme_data
 revenue_data = gme_revenue_df
